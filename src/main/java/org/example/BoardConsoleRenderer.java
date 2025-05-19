@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.pieces.Piece;
+
 public class BoardConsoleRenderer {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_WHITE_PIECE_COLOR = "\u001B[97m";
@@ -15,8 +17,15 @@ public class BoardConsoleRenderer {
         for (int rank = 8; rank >= 1; rank--) {
             String line = "";
             for (File file : File.values()) {
-                line += getSpriteForEmptySquare(new Coordinates(file, rank));
+                Coordinates coordinates = new Coordinates(file, rank);
+                if (board.isSquareEmpty(coordinates)) {
+                    line += getSpriteForEmptySquare(coordinates);
+                } else {
+                    line += getPieceSprite(board.getPiece(coordinates));
+                }
             }
+
+            line += ANSI_RESET;
             System.out.println(line);
         }
     }
@@ -43,4 +52,23 @@ public class BoardConsoleRenderer {
     private String getSpriteForEmptySquare(Coordinates coordinates) {
         return colorizeSprite("   ", Color.WHITE, Board.isSquareDark(coordinates));
     }
+
+    private String selectUnicodeSpriteForPiece(Piece piece) {
+        return switch (piece.getClass().getSimpleName()) {
+            case "Pawn" -> "♟";
+            case "Knight" -> "♞";
+            case "Bishop" -> "♝";
+            case "Rook" -> "♜";
+            case "Queen" -> "♛";
+            case "King" -> "♚";
+            default -> "";
+        };
+
+    }
+
+    private String getPieceSprite(Piece piece) {
+        return colorizeSprite(
+                " " + selectUnicodeSpriteForPiece(piece) + " ", piece.color, Board.isSquareDark(piece.coordinates));
+    }
+
 }
