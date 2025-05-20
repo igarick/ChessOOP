@@ -12,6 +12,17 @@ public class Board {
         pieces.put(coordinates, piece);
     }
 
+    public void removePiece(Coordinates coordinates) {
+        pieces.remove(coordinates);
+    }
+
+    public void movePiece(Coordinates from, Coordinates to) {
+        Piece piece = getPiece(from);
+
+        removePiece(from);
+        setPiece(to, piece);
+    }
+
     public boolean isSquareEmpty(Coordinates coordinates) {
         return !pieces.containsKey(coordinates);
     }
@@ -55,6 +66,6 @@ public class Board {
     }
 
     public static boolean isSquareDark(Coordinates coordinates) {
-        return ((coordinates.file.ordinal() + 1) + coordinates.rank) % 2 == 0;
+        return (((coordinates.file.ordinal() + 1) + coordinates.rank) % 2) == 0;
     }
 }

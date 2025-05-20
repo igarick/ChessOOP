@@ -3,6 +3,7 @@ package org.example.pieces;
 import org.example.Color;
 import org.example.Coordinates;
 
+import java.util.Collections;
 import java.util.Set;
 
 public class Bishop extends Piece {
@@ -13,6 +14,6 @@ public class Bishop extends Piece {
 
     @Override
     protected Set<CoordinatesShift> getPieceMoves() {
-        return null;
+        return Collections.emptySet();
     }
 }

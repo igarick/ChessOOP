@@ -12,9 +12,9 @@ public class Main {
         BoardConsoleRenderer renderer = new BoardConsoleRenderer();
         renderer.render(board);
 
-        Piece piece = board.getPiece(new Coordinates(File.B, 1));
+        Piece piece = board.getPiece(new Coordinates(File.G, 8));
         Set<Coordinates> availableMoveSquare = piece.getAvailableMoveSquares(board);
 
-        int a = 1;
+        int a = 123;
     }
 }

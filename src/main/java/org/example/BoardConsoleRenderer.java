@@ -54,21 +54,27 @@ public class BoardConsoleRenderer {
     }
 
     private String selectUnicodeSpriteForPiece(Piece piece) {
-        return switch (piece.getClass().getSimpleName()) {
-            case "Pawn" -> "♟";
-            case "Knight" -> "♞";
-            case "Bishop" -> "♝";
-            case "Rook" -> "♜";
-            case "Queen" -> "♛";
-            case "King" -> "♚";
-            default -> "";
-        };
-
-    }
+        switch (piece.getClass().getSimpleName()) {
+            case "Pawn":
+                return "♟";
+            case "Knight":
+                return "♞";
+            case "Bishop":
+                return "♝";
+            case "Rook":
+                return "♜";
+            case "Queen":
+                return "♛";
+            case "King":
+                return "♚";
+        }
+            return "";
+        }
 
     private String getPieceSprite(Piece piece) {
         return colorizeSprite(
-                " " + selectUnicodeSpriteForPiece(piece) + " ", piece.color, Board.isSquareDark(piece.coordinates));
+                " " + selectUnicodeSpriteForPiece(piece) + " ",
+                piece.color, Board.isSquareDark(piece.coordinates));
     }
 
 }
