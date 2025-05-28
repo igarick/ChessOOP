@@ -1,11 +1,9 @@
 package org.example.pieces;
 
-import org.example.Board;
+import org.example.board.Board;
 import org.example.Color;
 import org.example.Coordinates;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 

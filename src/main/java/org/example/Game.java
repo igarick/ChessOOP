@@ -1,8 +1,7 @@
 package org.example;
 
-import org.example.pieces.Piece;
-
-import java.util.Set;
+import org.example.board.Board;
+import org.example.board.Move;
 
 public class Game {
 
@@ -26,16 +25,9 @@ public class Game {
                 System.out.println("Black to move");
             }
 
-            Coordinates sourceCoordinates = InputCoordinates.inputPieceCoordinatesForColor(
-                    isWhiteToMove ? Color.WHITE : Color.BLACK, board);
+            Move move = InputCoordinates.inputMove(board, isWhiteToMove ? Color.WHITE : Color.BLACK, renderer);
 
-            Piece piece = board.getPiece(sourceCoordinates);
-            Set<Coordinates> availableMoveSquares = piece.getAvailableMoveSquares(board);
-
-            renderer.render(board, piece);
-            Coordinates targetCoordinates = InputCoordinates.inputAvailableSquare(availableMoveSquares);
-
-            board.movePiece(sourceCoordinates, targetCoordinates);
+            board.makeMove(move);
 
             isWhiteToMove =! isWhiteToMove;
         }

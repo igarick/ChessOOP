@@ -1,10 +1,9 @@
 package org.example.pieces;
 
-import org.example.Board;
+import org.example.board.Board;
 import org.example.Color;
 import org.example.Coordinates;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,6 +33,21 @@ public class Pawn extends Piece {
                 result.add(new CoordinatesShift(0, -2));
             }
 
+            result.add(new CoordinatesShift(-1, -1));
+            result.add(new CoordinatesShift(1, -1));
+        }
+
+        return result;
+    }
+
+    @Override
+    protected Set<CoordinatesShift> getPieceAttacks() {
+        Set<CoordinatesShift> result = new HashSet<>();
+
+        if (color == Color.WHITE) {
+            result.add(new CoordinatesShift(-1, 1));
+            result.add(new CoordinatesShift(1, 1));
+        } else {
             result.add(new CoordinatesShift(-1, -1));
             result.add(new CoordinatesShift(1, -1));
         }
