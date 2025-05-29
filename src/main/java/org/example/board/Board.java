@@ -86,7 +86,7 @@ public class Board {
         return (((coordinates.file.ordinal() + 1) + coordinates.rank) % 2) == 0;
     }
 
-    private List<Piece> getPiecesByColor(Color color) {
+    public List<Piece> getPiecesByColor(Color color) {
         List<Piece> result = new ArrayList<>();
 
         for (Piece piece : pieces.values()) {

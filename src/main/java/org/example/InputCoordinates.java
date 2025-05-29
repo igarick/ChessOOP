@@ -1,7 +1,9 @@
 package org.example;
 
 import org.example.board.Board;
+import org.example.board.BoardFactory;
 import org.example.board.Move;
+import org.example.pieces.King;
 import org.example.pieces.Piece;
 
 import java.util.Scanner;
@@ -102,6 +104,7 @@ public class InputCoordinates {
             Coordinates targetCoordinates = InputCoordinates.inputAvailableSquare(availableMoveSquares);
 
             Move move = new Move(sourceCoordinates, targetCoordinates);
+
             if (validateIfKingInCheckAfterMove(board, color, move)) {
                 System.out.println("Your king is under attack!");
                 continue;
@@ -111,6 +114,13 @@ public class InputCoordinates {
     }
 
     private static boolean validateIfKingInCheckAfterMove(Board board, Color color, Move move) {
-        return false;
+        Board copy = (new BoardFactory().copy(board));
+        copy.makeMove(move);
+
+        Piece king = copy.getPiecesByColor(color).stream().
+                filter(piece -> piece instanceof King).
+                findFirst().
+                get();
+        return copy.isSquareAttackedByColor(king.coordinates, color.opposite());
     }
 }
